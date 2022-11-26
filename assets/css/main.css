@@ -3993,7 +3993,7 @@ input, select, textarea {
 		}
 		#intro::before{
 			content:"";
-			background-image: url("images/jay4.jpg");
+			background-image: url("images/temp.jpg");
 			position: absolute;
 			background-size: cover;
 			top: 0px;
