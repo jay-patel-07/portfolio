@@ -1,81 +1,80 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Home Automation Using Hand Gestures</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="icon" href="jay.jpg" type="image/jpg" sizes="13x16">
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
 
-		<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="title"> Jay Patel</a>
-				<nav>
-					<ul>
-						<li><a href="index.html">Home</a></li>
-					</ul>
-				</nav>
-			</header>
+<head>
+	<meta charset="utf-8" />
+	<title>Home automation with hand gestures — Jay Patel</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Gesture-based home automation with Arduino, Python, and MediaPipe." />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+	<link rel="stylesheet" href="assets/css/portfolio.css" />
+	<link rel="stylesheet" href="assets/css/project-page.css" />
+	<link rel="icon" href="jay.jpg" type="image/jpeg" />
+</head>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<section id="main" class="wrapper">
-					<div class="inner">
-						<h1 class="major">Home Automation Using Hand Gestures</h1>
-				<!-- Main -->
-					<section id="main" class="wrapper">
-						<div class="inner">
-							<video style="justify-content: center" width="65%" height="80%" controls>
-								<source src="images/2IOT.mp4" type="video/mp4">
-								Your browser does not support the video tag.
-							</video>
-							<video style="justify-content: center" width="350" height="400" controls>
-									<source src="images/1IOT.mp4" type="video/mp4">
-									Your browser does not support the video tag.
-								</video>
-							<div style="display: flex">
-								
-								<p>
-									 <b> This project makes the life of disabled people easy. </b>
-									<br> The user can turn on/off the electrical appliances in the home by showing the specific gestures.
-									<br> By pointing the index finger towards the camera the light will turn on. If the user wants to turn off the light, he should close his fist. 
-									<br> Also, using an IR sensor, the light gets turned on and off automatically once the user enters and leaves the room, respectively.
-									 <br>
-									<b> Technologies Used:</b> Arduino UNO, Relay Module, IR Sensor, Breadboard, Jumper wires, Electrical Motor, Batteries, pyFirmata, Python, MediaPipe 
-								</p>
-							</div>
-							<a href="https://github.com/jay-patel-07/Home_Automation_Using_Hand_Gestures" download> Download Code </a>
-						</div>
-					</section>
+<body class="subpage">
+	<div class="bg-mesh" aria-hidden="true"></div>
+	<div class="bg-grid" aria-hidden="true"></div>
 
-			</div>
-	<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>
-							<h3>Email</h3>
-							<a href="mailto:jayunaliya@gmail.com" style="color: white">jayunaliya@gmail.com</a>
-						</li>
-						<li>
-							<h3>Phone</h3>
-							<span style="color: white">+1 (343) 558 6605</span>
-						</li>					
-					</ul>
+	<header class="site-header site-header--sub">
+		<a href="index.html" class="brand">jay<span>.</span>dev</a>
+		<nav class="nav-desktop" aria-label="Primary">
+			<a href="index.html">Home</a>
+			<a href="index.html#one">Projects</a>
+		</nav>
+	</header>
+
+	<main class="subpage-main">
+		<article class="project-article reveal visible">
+			<p class="eyebrow">Project</p>
+			<h1>Home automation using hand gestures</h1>
+
+			<div class="project-media-grid cols-2">
+				<div class="project-media">
+					<video controls playsinline>
+						<source src="images/2IOT.mp4" type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
 				</div>
-			</footer>
+				<div class="project-media">
+					<video controls playsinline>
+						<source src="images/1IOT.mp4" type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<div class="project-prose">
+				<p>
+					Built to <strong>make daily tasks easier for people with disabilities</strong>: control appliances with gestures — e.g. point index finger to turn a light on, close fist to turn it off. An <strong>IR sensor</strong> can also toggle lighting when someone enters or leaves the room.
+				</p>
+				<p><strong>Technologies:</strong> Arduino UNO, relay module, IR sensor, breadboard, pyFirmata, Python, MediaPipe.</p>
+			</div>
 
-	</body>
+			<div class="actions-row">
+				<a href="https://github.com/jay-patel-07/Home_Automation_Using_Hand_Gestures" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> View on GitHub</a>
+			</div>
+		</article>
+	</main>
+
+	<section class="footer-cta">
+		<div class="footer-inner">
+			<div>
+				<h2>Let’s build something.</h2>
+				<p>Email or call — always happy to talk software, teams, or interesting problems.</p>
+			</div>
+			<div class="footer-links">
+				<a href="mailto:jayunaliya@gmail.com">jayunaliya@gmail.com</a>
+				<span>+1 (343) 558-6605</span>
+			</div>
+		</div>
+		<p class="footer-bar">© Jay Patel</p>
+	</section>
+
+	<script src="assets/js/portfolio.js" defer></script>
+</body>
+
 </html>

@@ -1,0 +1,128 @@
+/* Load after portfolio.css — project / subpage layout */
+
+/* Project / subpages — same theme, article layout */
+body.subpage {
+  min-height: 100vh;
+}
+
+.site-header--sub .nav-desktop {
+  display: flex !important;
+}
+
+.site-header--sub .nav-toggle {
+  display: none !important;
+}
+
+.site-header--sub .nav-mobile {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .site-header--sub {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--header-h);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .site-header--sub .nav-desktop {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}
+
+.subpage-main {
+  padding: calc(var(--header-h) + 2rem) 1.5rem 3rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.project-article {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+}
+
+.project-article .eyebrow {
+  margin-bottom: 0.75rem;
+}
+
+.project-article h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+  color: var(--text);
+}
+
+.project-media {
+  margin: 0 0 1.5rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+}
+
+.project-media video,
+.project-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
+.project-media-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .project-media-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.project-media-grid .project-media {
+  margin: 0;
+}
+
+.project-prose {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.project-prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.project-prose p {
+  margin: 0 0 1rem;
+}
+
+.project-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.actions-row {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.actions-row .btn i {
+  margin-right: 0.35rem;
+}
+
+.subpage .footer-cta {
+  margin-top: 0;
+}
