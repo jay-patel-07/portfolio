@@ -29,7 +29,7 @@
 	<a href="#intro" class="skip-link">Skip to content</a>
 
 	<header class="site-header">
-		<a href="#intro" class="brand">jay<span>.</span>dev</a>
+		<a href="#intro" class="brand">jay<span>.</span>dev &nbsp;</a>
 		<nav class="nav-desktop" aria-label="Primary">
 			<a href="#intro">About</a>
 			<a href="#five">Education</a>
@@ -40,6 +40,7 @@
 			<a href="#six">Interests</a>
 			<a href="#footer">Contact</a>
 		</nav>
+		<button type="button" class="theme-toggle" aria-label="Toggle theme">◐</button>
 		<button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
 	</header>
 	<nav class="nav-mobile" aria-label="Mobile">
@@ -56,7 +57,7 @@
 	<main>
 		<section id="intro" class="hero">
 			<p class="hero-badge"><span aria-hidden="true">◆</span> Software Developer @ Nokia</p>
-			<h1>Jay Patel</h1>
+			<h1><span id="type" class="typed" aria-hidden="true"></span><span class="sr-only" id="type-aria" aria-live="polite"></span></h1>
 			<p class="hero-sub">
 				Building reliable software, sharpening algorithms, and exploring AI — from competitive programming to production systems.
 			</p>
@@ -69,6 +70,21 @@
 			<div class="hero-actions">
 				<a href="#one" class="btn btn-primary">View projects</a>
 				<a href="mailto:jayunaliya@gmail.com" class="btn btn-ghost">Get in touch</a>
+				<button type="button" class="btn btn-ghost copy-email-btn" data-email="jayunaliya@gmail.com">Copy email</button>
+			</div>
+			<div class="stat-row reveal">
+				<div class="stat-card">
+					<p>Experience</p>
+					<strong id="exp-years" data-exp-start="2022-05-01">3+ years</strong>
+				</div>
+				<div class="stat-card">
+					<p>Projects</p>
+					<strong>10+</strong>
+				</div>
+				<div class="stat-card">
+					<p>Focus</p>
+					<strong>AI + Backend</strong>
+				</div>
 			</div>
 			<div class="social-row" aria-label="Social links">
 				<a href="mailto:jayunaliya@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
@@ -110,48 +126,60 @@
 				<h2 class="section-title">Projects</h2>
 				<p class="section-lead">Research, full-stack apps, visualizations, and tools — from meta-heuristics to real-time chat.</p>
 			</div>
-			<div class="card-grid">
-				<article class="project-card reveal">
-					<h3>Meta-heuristic search for the ATSP</h3>
+			<div class="projects-toolbar reveal">
+				<label class="sr-only" for="project-search">Search projects</label>
+				<input id="project-search" class="project-search" type="search" placeholder="Search projects, stack, keywords..." />
+				<div class="filter-row" aria-label="Project filters">
+					<button class="chip active" data-filter="all" type="button">All</button>
+					<button class="chip" data-filter="ai" type="button">AI/ML</button>
+					<button class="chip" data-filter="fullstack" type="button">Full Stack</button>
+					<button class="chip" data-filter="algorithms" type="button">Algorithms</button>
+					<button class="chip" data-filter="systems" type="button">Systems</button>
+				</div>
+			</div>
+			<div class="card-grid" id="project-grid">
+				<article class="project-card reveal" data-tags="algorithms java optimization research">
+					<h3><i class="project-icon fa-solid fa-brain" aria-hidden="true"></i>Meta-heuristic search for the ATSP</h3>
 					<p>First ascent, steepest ascent hill climbing, simulated annealing, and a genetic algorithm on the asymmetric TSP with 2-node transformation — compared side by side.</p>
 					<a href="atsp.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Event detection from social (Twitter) text</h3>
+				<article class="project-card reveal" data-tags="ai ml nlp python clustering">
+					<h3><i class="project-icon fa-solid fa-bullhorn" aria-hidden="true"></i>Event detection from social (Twitter) text</h3>
 					<p>Text segmentation, bursty segment extraction, and clustering to surface and summarize events from streams.</p>
 					<a href="EventDetection.htm" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Online chat app</h3>
+				<article class="project-card reveal" data-tags="fullstack mern react node mongodb socket">
+					<h3><i class="project-icon fa-solid fa-comments" aria-hidden="true"></i>Online chat app</h3>
 					<p>Real-time MERN stack chat with auth, group and direct messaging, and live updates via Socket.IO.</p>
 					<a href="chatapp.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Home automation with hand gestures</h3>
+				<article class="project-card reveal" data-tags="iot arduino python embedded sensors">
+					<h3><i class="project-icon fa-solid fa-microchip" aria-hidden="true"></i>Home automation with hand gestures</h3>
 					<p>Gesture recognition to control appliances — aimed at improving accessibility for people with disabilities.</p>
 					<a href="iot.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Handwritten ⇄ text conversion</h3>
+				<article class="project-card reveal" data-tags="ai cnn flask opencv webapp">
+					<h3><i class="project-icon fa-solid fa-pen-nib" aria-hidden="true"></i>Handwritten ⇄ text conversion</h3>
 					<p>CNN-based handwriting recognition plus JavaScript to render text in a handwritten style.</p>
 					<a href="Text&amp;Hand.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Visualization of OS algorithms</h3>
+				<article class="project-card reveal" data-tags="systems os algorithms visualization python">
+					<h3><i class="project-icon fa-solid fa-cogs" aria-hidden="true"></i>Visualization of OS algorithms</h3>
 					<p>Interactive demos for page replacement and disk scheduling algorithms used in operating systems courses.</p>
 					<a href="OS.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Lake City data collector</h3>
+				<article class="project-card reveal" data-tags="fullstack php javascript database community">
+					<h3><i class="project-icon fa-solid fa-city" aria-hidden="true"></i>Lake City data collector</h3>
 					<p>Community site for Avadh Lake City, Surat — collecting structured resident data (contact, DOB, blood group, and more).</p>
 					<a href="LakeCity.html" class="btn btn-ghost">View project</a>
 				</article>
-				<article class="project-card reveal">
-					<h3>Shortest path visualizer</h3>
+				<article class="project-card reveal" data-tags="algorithms systems java dijkstra visualization">
+					<h3><i class="project-icon fa-solid fa-route" aria-hidden="true"></i>Shortest path visualizer</h3>
 					<p>Unweighted Dijkstra’s algorithm with walls — visualize shortest paths on a grid.</p>
 					<a href="PathFinder.html" class="btn btn-ghost">View project</a>
 				</article>
 			</div>
+			<p id="project-empty" class="project-empty" hidden>No projects match this filter yet.</p>
 		</section>
 
 		<section id="two" class="section">
@@ -327,6 +355,7 @@
 		</section>
 	</main>
 
+	<button type="button" class="to-top-btn" aria-label="Back to top">↑</button>
 	<script src="assets/js/portfolio.js" defer></script>
 </body>
 

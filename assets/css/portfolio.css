@@ -3,6 +3,8 @@
   --bg-deep: #070a12;
   --bg-surface: #0f1419;
   --bg-elevated: #151b24;
+  --header-bg: rgba(7, 10, 18, 0.75);
+  --hero-gradient: linear-gradient(135deg, #fff 0%, #a5f3fc 50%, var(--accent) 100%);
   --border: rgba(255, 255, 255, 0.08);
   --text: #e8eaed;
   --text-muted: #9aa0a6;
@@ -16,6 +18,37 @@
   --header-h: 72px;
   --max: 1120px;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-deep: #f4f7fb;
+  --bg-surface: #ffffff;
+  --bg-elevated: #eef3f9;
+  --border: rgba(15, 23, 42, 0.12);
+  --text: #111827;
+  --text-muted: #4b5563;
+  --accent: #0ea5e9;
+  --accent-dim: rgba(14, 165, 233, 0.12);
+  --accent-glow: rgba(14, 165, 233, 0.25);
+  /* lighter header and a darker hero gradient so the heading remains visible on white */
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --hero-gradient: linear-gradient(135deg, #0f1724 0%, #7dd3fc 50%, var(--accent) 100%);
+}
+
+/* Light theme - variant 2: warmer palette (preferred) */
+[data-theme="light"][data-light-variant="2"] {
+  --accent: #ff7a59; /* coral */
+  --accent-dim: rgba(255, 122, 89, 0.12);
+  --accent-glow: rgba(255, 122, 89, 0.20);
+  --hero-gradient: linear-gradient(135deg, #0b1220 0%, #ffb78a 45%, var(--accent) 100%);
+}
+
+/* Light theme - variant 3: cool teal */
+[data-theme="light"][data-light-variant="3"] {
+  --accent: #06b6d4; /* teal */
+  --accent-dim: rgba(6, 182, 212, 0.10);
+  --accent-glow: rgba(6, 182, 212, 0.22);
+  --hero-gradient: linear-gradient(135deg, #08101a 0%, #7ee7ff 45%, var(--accent) 100%);
 }
 
 *,
@@ -85,6 +118,15 @@ a:hover {
     var(--bg-deep);
 }
 
+/* light theme: make mesh warmer/softer for a pleasant white background */
+[data-theme="light"] .bg-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(14, 165, 233, 0.06), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 122, 89, 0.04), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 80%, rgba(34, 211, 238, 0.03), transparent),
+    var(--bg-deep);
+}
+
 .bg-grid {
   position: fixed;
   inset: 0;
@@ -95,6 +137,41 @@ a:hover {
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 100%);
   pointer-events: none;
+}
+
+/* SVG blobs container (stronger animated background) */
+.bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: 0.12;
+  transform-origin: center;
+  filter: blur(28px) saturate(120%);
+}
+
+@keyframes blob-move {
+  0% { transform: translate3d(-4%, -2%, 0) scale(1); }
+  50% { transform: translate3d(6%, 4%, 0) scale(1.06); }
+  100% { transform: translate3d(-4%, -2%, 0) scale(1); }
+}
+
+.bg-blobs svg { width: 120%; height: 120%; animation: blob-move 36s ease-in-out infinite; }
+
+/* lazy-image blur-up */
+.img-lazy {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: blur(8px) saturate(80%);
+  transform: scale(1.02);
+  transition: filter 480ms ease, transform 480ms ease, opacity 360ms ease;
+  opacity: 0.98;
+}
+.img-lazy.loaded {
+  filter: none;
+  transform: none;
+  opacity: 1;
 }
 
 .site-header {
@@ -108,7 +185,8 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.5rem;
-  background: rgba(7, 10, 18, 0.75);
+  /* use theme-aware header background */
+  background: var(--header-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -124,6 +202,9 @@ a:hover {
 .brand span {
   color: var(--accent);
 }
+
+/* typed brand styles */
+/* brand typing removed - brand is static */
 
 .nav-desktop {
   display: flex;
@@ -161,6 +242,19 @@ a:hover {
   font-size: 1.25rem;
 }
 
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
 .nav-mobile {
   display: none;
   position: fixed;
@@ -194,7 +288,8 @@ a:hover {
 }
 
 main {
-  padding-top: var(--header-h);
+  /* give extra breathing room so first section doesn't touch the fixed header */
+  padding-top: calc(var(--header-h) + 12px);
 }
 
 .section {
@@ -262,10 +357,33 @@ main {
   letter-spacing: -0.04em;
   line-height: 1.1;
   margin: 0 0 1rem;
-  background: linear-gradient(135deg, #fff 0%, #a5f3fc 50%, var(--accent) 100%);
+  /* theme-aware gradient for good contrast in both dark and light modes */
+  background: var(--hero-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* typed text cursor and accessible typing styles */
+.typed::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  background: var(--accent);
+  margin-left: 0.45rem;
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.typed {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .hero-sub {
@@ -366,26 +484,196 @@ main {
   background: var(--accent-dim);
 }
 
+.stat-row {
+  margin: 0 0 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  max-width: 640px;
+}
+
+/* project card micro-interactions */
+.project-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  border-radius: 12px;
+  transition: transform 160ms var(--ease), box-shadow 200ms var(--ease), border-color 160ms var(--ease);
+}
+.project-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.25), 0 2px 6px rgba(0,0,0,0.06);
+  border-color: var(--accent);
+}
+
+/* subtle animated background movement for the mesh */
+.bg-mesh {
+  animation: mesh-drift 24s linear infinite;
+  background-size: 120% 140%;
+}
+
+@keyframes mesh-drift {
+  0% { background-position: 10% 10%; }
+  50% { background-position: 90% 70%; }
+  100% { background-position: 10% 10%; }
+}
+
+/* improve contrast when typed text appears (light theme) */
+.typed { color: var(--accent); }
+
+.stat-card {
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+}
+
+.stat-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+.projects-toolbar {
+  margin-bottom: 1.25rem;
+}
+
+.project-search {
+  width: min(100%, 520px);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.chip.active,
+.chip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.project-card.is-hidden {
+  display: none;
+}
+
+.project-empty {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.to-top-btn {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: all 0.25s var(--ease);
+}
+
+.to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 .card-grid {
   display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
 }
 
 .project-card {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  border-radius: 10px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s, box-shadow 0.25s;
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 240ms var(--ease);
 }
 
 .project-card:hover {
-  border-color: rgba(34, 211, 238, 0.35);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 36px rgba(2,6,23,0.18), 0 4px 10px rgba(0,0,0,0.06);
 }
+
+/* left accent bar that grows on hover */
+.project-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), rgba(255,255,255,0.06));
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 260ms var(--ease);
+}
+.project-card:hover::before { transform: scaleY(1); }
+
+/* subtle overlay on hover */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
+  opacity: 0;
+  transition: opacity 260ms var(--ease);
+}
+.project-card:hover::after { opacity: 1; }
 
 .project-card h3 {
   font-size: 1.1rem;
@@ -395,12 +683,33 @@ main {
   line-height: 1.35;
 }
 
+.project-card h3 { display: flex; align-items: center; gap: 0.6rem; transition: transform 180ms var(--ease); }
+.project-icon { color: var(--accent); font-size: 1.05rem; width: 1.3rem; text-align: center; }
+.project-card:hover h3 { transform: translateY(-3px); }
+
+.project-card p { margin: 0 0 0.9rem; }
+
 .project-card p {
   margin: 0 0 1rem;
   color: var(--text-muted);
   font-size: 0.95rem;
   flex-grow: 1;
 }
+
+/* project thumbnail */
+.project-thumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.9rem;
+  display: block;
+}
+
+@media screen and (max-width: 640px) {
+  .project-thumb { height: 220px; }
+}
+
 
 .project-meta {
   font-family: var(--font-mono);
@@ -679,6 +988,10 @@ tbody tr:hover td {
     display: flex;
   }
 
+  .theme-toggle {
+    margin-left: 0;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr;
     text-align: center;
@@ -690,6 +1003,10 @@ tbody tr:hover td {
 }
 
 @media (max-width: 480px) {
+  .stat-row {
+    grid-template-columns: 1fr;
+  }
+
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
