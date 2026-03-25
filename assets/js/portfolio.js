@@ -23,6 +23,31 @@
     });
   }
 
+  // Intercept in-page nav anchor clicks to avoid adding hash fragments to the URL
+  // while keeping standard modifier behaviors (Ctrl/Cmd to open in new tab).
+  document.querySelectorAll('.nav-desktop a[href^="#"], .nav-mobile a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      // allow modifier clicks / non-left clicks to behave normally
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      var href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      // compute offset to account for fixed header
+      var headerH = header ? header.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      // remove hash from URL so it doesn't appear
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (err) { /* ignore */ }
+      // close mobile nav if open
+      if (mobile && mobile.classList.contains('open')) {
+        mobile.classList.remove('open');
+        if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = '☰'; }
+      }
+    });
+  });
+
   var sections = [];
   navLinks.forEach(function (a) {
     var id = a.getAttribute("href");
