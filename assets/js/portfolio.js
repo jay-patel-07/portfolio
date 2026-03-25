@@ -181,11 +181,10 @@
 
   var phrases = [
     "Jay Patel",
-    "jay.dev",
     "Software Developer",
     "AI & ML enthusiast",
-    "Competitive programmer",
-    "Building reliable systems"
+    "Building reliable systems",
+    "Competitive programmer"
   ];
 
   var typingSpeed = 90; // ms per char
