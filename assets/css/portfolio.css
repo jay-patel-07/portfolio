@@ -661,6 +661,8 @@ main {
   transform-origin: top;
   transform: scaleY(0);
   transition: transform 260ms var(--ease);
+  /* allow clicks through decorative pseudo-element */
+  pointer-events: none;
 }
 .project-card:hover::before { transform: scaleY(1); }
 
@@ -672,6 +674,8 @@ main {
   background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
   opacity: 0;
   transition: opacity 260ms var(--ease);
+  /* decorative overlay should not block interactions */
+  pointer-events: none;
 }
 .project-card:hover::after { opacity: 1; }
 

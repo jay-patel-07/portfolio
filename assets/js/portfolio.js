@@ -34,6 +34,32 @@
     }
   });
 
+  // Smooth-scroll header/nav links without adding a hash to the URL.
+  // Only applies to the nav links selected earlier (scoped to .nav-desktop/.nav-mobile)
+  navLinks.forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      // Respect modified clicks (open in new tab/window) and non-primary buttons
+      if (ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) !== '#') return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      ev.preventDefault();
+      // compute top offset to account for fixed header
+      var headerHeight = header ? header.offsetHeight : 0;
+      var targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      // Move focus for accessibility without scrolling again
+      try {
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        setTimeout(function () { target.removeAttribute('tabindex'); }, 1200);
+      } catch (e) { }
+      // remove any hash from the URL (do not add one)
+      try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) { }
+    });
+  });
+
   function setActive() {
     var y = window.scrollY + (header ? header.offsetHeight : 0) + 40;
     var current = sections[0] && sections[0].id;
